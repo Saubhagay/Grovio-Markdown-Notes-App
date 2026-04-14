@@ -55,7 +55,7 @@ const getAllNotes = () => {
 const createNote = (title, content) => {
   db.run('INSERT INTO notes (title, content) VALUES (?, ?)', [title, content]);
   saveDb();
-  const result = db.exec('SELECT last_insert_rowid() AS id');
+  const result = db.exec('SELECT MAX(id) AS id FROM notes');
   if (!result[0] || !result[0].values[0]) {
     return null;
   }
