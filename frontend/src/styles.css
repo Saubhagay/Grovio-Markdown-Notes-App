@@ -1,0 +1,395 @@
+:root {
+    --bg: #f7f7f7;
+    --panel: #ffffff;
+    --border: #d9d9d9;
+    --text: #222222;
+    --muted: #666666;
+    --primary: #2563eb;
+    --danger: #b91c1c;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    background: var(--bg);
+    color: var(--text);
+    transition: background 160ms ease, color 160ms ease;
+}
+
+body.dark-mode {
+    --bg: #111827;
+    --panel: #1f2937;
+    --border: #334155;
+    --text: #e5e7eb;
+    --muted: #9ca3af;
+    --primary: #60a5fa;
+    --danger: #f87171;
+}
+
+#root {
+    min-height: 100vh;
+}
+
+.app-shell {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 24px;
+}
+
+.app-hero {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 24px;
+    padding: 20px;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+}
+
+.eyebrow {
+    margin: 0 0 6px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--primary);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+.app-hero h1,
+.panel-heading h2 {
+    margin: 0;
+}
+
+.app-hero h1 {
+    font-size: clamp(1.7rem, 3vw, 2.6rem);
+    line-height: 1.1;
+}
+
+.hero-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.app-container {
+    display: grid;
+    grid-template-columns: 300px minmax(0, 1fr);
+    gap: 20px;
+}
+
+.card-panel {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+}
+
+.sidebar,
+.editor-panel,
+.preview-panel {
+    padding: 20px;
+}
+
+.sidebar {
+    position: sticky;
+    top: 20px;
+    align-self: start;
+}
+
+.panel-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.panel-heading span {
+    min-width: 32px;
+    padding: 4px 10px;
+    border-radius: 999px;
+    background: #eef2ff;
+    color: var(--primary);
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-align: center;
+}
+
+.primary-button,
+.secondary-button,
+.note-select,
+.note-delete {
+    border: none;
+    cursor: pointer;
+}
+
+.primary-button {
+    padding: 10px 16px;
+    border-radius: 10px;
+    background: var(--primary);
+    color: #ffffff;
+    font-weight: 700;
+}
+
+.primary-button:hover {
+    filter: brightness(0.95);
+}
+
+.secondary-button {
+    padding: 10px 16px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    background: var(--panel);
+    color: var(--text);
+    font-weight: 700;
+}
+
+.secondary-button:hover {
+    filter: brightness(0.95);
+}
+
+.search-input {
+    width: 100%;
+    margin-bottom: 14px;
+    padding: 10px 12px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: var(--panel);
+    color: var(--text);
+}
+
+.notes-list {
+    display: grid;
+    gap: 12px;
+}
+
+.note-item {
+    display: grid;
+    gap: 8px;
+}
+
+.note-select {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    padding: 14px;
+    border-radius: 12px;
+    background: #fafafa;
+    border: 1px solid var(--border);
+    text-align: left;
+}
+
+.note-select.active {
+    border-color: var(--primary);
+    background: rgba(37, 99, 235, 0.08);
+}
+
+.note-title {
+    font-weight: 700;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.note-hint {
+    color: var(--muted);
+    font-size: 0.8rem;
+}
+
+.note-delete {
+    justify-self: start;
+    padding: 8px 12px;
+    border-radius: 10px;
+    background: #fee2e2;
+    color: var(--danger);
+    font-weight: 700;
+}
+
+.notes-empty {
+    margin: 10px 0;
+    color: var(--muted);
+    font-size: 0.95rem;
+}
+
+.save-status {
+    min-width: 0;
+    padding: 0;
+    border-radius: 0;
+    background: transparent;
+    color: var(--muted);
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.editor-preview {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+}
+
+.editor-panel,
+.preview-panel,
+.empty-state {
+    min-height: 70vh;
+}
+
+.editor-panel {
+    display: grid;
+    grid-template-rows: auto auto 1fr;
+    gap: 14px;
+}
+
+.editor-title,
+.editor-textarea {
+    width: 100%;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: #ffffff;
+    color: var(--text);
+    font: inherit;
+}
+
+.editor-title {
+    padding: 12px 14px;
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+.editor-textarea {
+    min-height: 50vh;
+    padding: 14px;
+    resize: vertical;
+    line-height: 1.6;
+}
+
+.editor-title:focus,
+.editor-textarea:focus,
+.primary-button:focus,
+.secondary-button:focus,
+.note-select:focus,
+.note-delete:focus,
+.search-input:focus {
+    outline: 2px solid rgba(37, 99, 235, 0.35);
+    outline-offset: 2px;
+}
+
+.preview-panel {
+    overflow: auto;
+}
+
+.markdown-body {
+    line-height: 1.7;
+}
+
+.markdown-body :first-child {
+    margin-top: 0;
+}
+
+.markdown-body h1 {
+    font-size: 1.9rem;
+    margin-bottom: 0.5rem;
+}
+
+.markdown-body h2 {
+    font-size: 1.5rem;
+    margin-bottom: 0.45rem;
+}
+
+.markdown-body h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.4rem;
+}
+
+.markdown-body strong {
+    font-weight: 700;
+}
+
+.markdown-body em {
+    font-style: italic;
+}
+
+.markdown-body ul,
+.markdown-body ol {
+    padding-left: 1.4rem;
+}
+
+.markdown-body a {
+    color: var(--primary);
+    text-decoration: underline;
+}
+
+.markdown-body code {
+    padding: 0.15rem 0.35rem;
+    border-radius: 6px;
+    background: #f3f4f6;
+    font-family: Consolas, Menlo, Monaco, monospace;
+}
+
+.markdown-body pre {
+    overflow: auto;
+    padding: 14px;
+    border-radius: 12px;
+    background: #1f2937;
+    color: #f9fafb;
+}
+
+.markdown-body pre code {
+    padding: 0;
+    background: transparent;
+    color: inherit;
+}
+
+.markdown-body blockquote {
+    margin-left: 0;
+    padding-left: 14px;
+    border-left: 4px solid #cbd5e1;
+    color: var(--muted);
+}
+
+.empty-state {
+    display: grid;
+    place-items: center;
+    padding: 24px;
+    color: var(--muted);
+    text-align: center;
+}
+
+@media (max-width: 1000px) {
+
+    .app-container,
+    .editor-preview {
+        grid-template-columns: 1fr;
+    }
+
+    .sidebar {
+        position: static;
+    }
+}
+
+@media (max-width: 700px) {
+    .app-shell {
+        padding: 16px;
+    }
+
+    .app-hero {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .sidebar,
+    .editor-panel,
+    .preview-panel {
+        padding: 16px;
+    }
+
+    .note-select {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
