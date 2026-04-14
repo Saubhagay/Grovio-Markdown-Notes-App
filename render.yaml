@@ -15,11 +15,12 @@ services:
       mountPath: /var/data
       sizeGB: 1
 
-staticSites:
-  - name: markdown-notes-frontend
+  - type: web
+    name: markdown-notes-frontend
+    env: static
     rootDir: frontend
     buildCommand: npm install && npm run build
-    publishPath: build
+    startCommand: npx serve -s build -l 3000
     envVars:
       - key: REACT_APP_API_URL
         value: https://markdown-notes-backend.onrender.com/notes
