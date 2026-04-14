@@ -1,0 +1,24 @@
+# dependencies
+backend/node_modules/
+frontend/node_modules/
+
+# builds
+frontend/build/
+backend/dist/
+
+# environment files
+.env
+.env.*
+backend/.env
+frontend/.env
+
+# local databases and logs
+backend/notes.db
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS files
+.DS_Store
+Thumbs.db

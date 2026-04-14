@@ -1,0 +1,25 @@
+services:
+  - type: web
+    name: markdown-notes-backend
+    env: node
+    rootDir: backend
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: SQLITE_DB_PATH
+        value: /var/data/notes.db
+      - key: CORS_ORIGIN
+        value: https://markdown-notes-frontend.onrender.com
+    disk:
+      name: notes-data
+      mountPath: /var/data
+      sizeGB: 1
+
+staticSites:
+  - name: markdown-notes-frontend
+    rootDir: frontend
+    buildCommand: npm install && npm run build
+    publishPath: build
+    envVars:
+      - key: REACT_APP_API_URL
+        value: https://markdown-notes-backend.onrender.com/notes
