@@ -1,33 +1,46 @@
-const db = require('../config/db');
+const { getAllNotes, createNote, updateNote, deleteNote } = require('../config/db');
 
 exports.getNotes = (req, res, next) => {
-    db.all('SELECT * FROM notes', [], (err, rows) => {
-        if (err) return next(err);
-        res.json(rows);
-    });
+    try {
+        const results = getAllNotes();
+        const notes = results[0] ? results[0].values.map(row => ({
+            id: row[0],
+            title: row[1],
+            content: row[2]
+        })) : [];
+        res.json(notes);
+    } catch (err) {
+        next(err);
+    }
 };
 
 exports.createNote = (req, res, next) => {
-    const { title, content } = req.body;
-    db.run('INSERT INTO notes (title, content) VALUES (?, ?)', [title, content], function (err) {
-        if (err) return next(err);
-        res.status(201).json({ id: this.lastID });
-    });
+    try {
+        const { title, content } = req.body;
+        createNote(title, content);
+        res.status(201).json({ success: true });
+    } catch (err) {
+        next(err);
+    }
 };
 
 exports.updateNote = (req, res, next) => {
-    const { title, content } = req.body;
-    const { id } = req.params;
-    db.run('UPDATE notes SET title=?, content=? WHERE id=?', [title, content, id], function (err) {
-        if (err) return next(err);
-        res.json({ updated: this.changes });
-    });
+    try {
+        const { title, content } = req.body;
+        const { id } = req.params;
+        const changes = updateNote(id, title, content);
+        res.json({ updated: changes });
+    } catch (err) {
+        next(err);
+    }
 };
 
 exports.deleteNote = (req, res, next) => {
-    const { id } = req.params;
-    db.run('DELETE FROM notes WHERE id=?', [id], function (err) {
-        if (err) return next(err);
-        res.json({ deleted: this.changes });
-    });
+    try {
+        const { id } = req.params;
+        const changes = deleteNote(id);
+        res.json({ deleted: changes });
+    } catch (err) {
+        next(err);
+    }
 };
