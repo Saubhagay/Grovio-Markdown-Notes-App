@@ -17,8 +17,8 @@ exports.getNotes = (req, res, next) => {
 exports.createNote = (req, res, next) => {
     try {
         const { title, content } = req.body;
-        createNote(title, content);
-        res.status(201).json({ success: true });
+        const id = createNote(title, content);
+        res.status(201).json({ id });
     } catch (err) {
         next(err);
     }

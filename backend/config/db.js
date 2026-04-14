@@ -55,7 +55,11 @@ const getAllNotes = () => {
 const createNote = (title, content) => {
   db.run('INSERT INTO notes (title, content) VALUES (?, ?)', [title, content]);
   saveDb();
-  return db.getRowsModified();
+  const result = db.exec('SELECT last_insert_rowid() AS id');
+  if (!result[0] || !result[0].values[0]) {
+    return null;
+  }
+  return result[0].values[0][0];
 };
 
 const updateNote = (id, title, content) => {
