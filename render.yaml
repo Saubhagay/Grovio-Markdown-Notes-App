@@ -6,14 +6,8 @@ services:
     buildCommand: npm install
     startCommand: npm start
     envVars:
-      - key: SQLITE_DB_PATH
-        value: /var/data/notes.db
       - key: CORS_ORIGIN
         value: https://markdown-notes-frontend.onrender.com
-    disk:
-      name: notes-data
-      mountPath: /var/data
-      sizeGB: 1
 
   - type: web
     name: markdown-notes-frontend
